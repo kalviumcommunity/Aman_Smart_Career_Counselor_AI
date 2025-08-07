@@ -3,7 +3,7 @@
 An AI-powered career guidance assistant that helps users explore career paths tailored to their skills, interests, and educational background. This project uses modern LLM features such as Prompt Engineering, Retrieval-Augmented Generation (RAG), Structured Output, and Function Calling to deliver accurate and personalized recommendations.
 
 ---
-
+ 
 ## 📌 Features
 
 - ✅ **Prompting**: Engages users through intelligent, structured prompts to gather inputs like skills, education, and interests.
