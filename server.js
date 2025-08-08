@@ -7,7 +7,7 @@ const axios = require("axios");
  
 // Get the Gemini API key from environment variables
 const geminiApiKey = process.env.GEMINI_API_KEY;
-
+ 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 // API endpoint for Gemini
 app.post("/api/gemini", async (req, res) => {
   const { prompt } = req.body;
-
+ 
   // Input validation
   if (!prompt) {
     return res.status(400).json({ error: "Prompt is required" });
