@@ -26,9 +26,9 @@ An AI-powered career guidance assistant that helps users explore career paths ta
 | External APIs   | Coursera, EdX, or dummy data functions  |
 
 ---
-
+ 
 ## 🚀 How It Works
-
+ 
 1. **User Input**: User enters their skills, interests, and education background via prompts.
 2. **RAG Flow**: System retrieves relevant job roles from document-based knowledge or API.
 3. **Function Calling**: Backend functions or APIs fetch matching courses and score compatibility.
@@ -38,7 +38,7 @@ An AI-powered career guidance assistant that helps users explore career paths ta
     - Required Skills
     - Recommended Courses
 
----
+--- 
 
 ## 🗂 Example Output (Structured JSON)
 
