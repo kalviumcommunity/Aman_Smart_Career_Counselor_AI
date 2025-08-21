@@ -23,7 +23,7 @@ app.post('/api/vector/search', async (req, res) => {
   if (!embedding) {
     return res.status(400).json({ error: 'embedding is required' });
   }
-  try {
+  try {    
     // Get all vectors from DB (for demo, assuming db.getAll() returns [{id, embedding, metadata}])
     const allVectors = await db.getAll();
     // Compute Euclidean distance for each
