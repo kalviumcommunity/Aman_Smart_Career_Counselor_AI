@@ -29,7 +29,7 @@ app.post('/api/vector/search', async (req, res) => {
     // Compute Euclidean distance for each
     const euclideanDistance = require('./euclideanDistance');
     const distances = allVectors.map(v => ({
-      id: v.id,
+      id: v.id,    
       distance: euclideanDistance(embedding, v.embedding),
       metadata: v.metadata
     }));

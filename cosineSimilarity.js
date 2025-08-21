@@ -5,7 +5,7 @@ function cosineSimilarity(a, b) {
   for (let i = 0; i < a.length; i++) {
     dot += a[i] * b[i];
     normA += a[i] * a[i];
-    normB += b[i] * b[i];
+    normB += b[i] * b[i];   
   }
   return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
