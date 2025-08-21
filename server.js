@@ -1,6 +1,22 @@
 const cosineSimilarity = require('./cosineSimilarity');
 // VectorDB integration
 const db = require('./vectorDB');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+require("dotenv").config();
+const axios = require("axios");
+
+
+// ...existing code...
+
+const geminiApiKey = process.env.GEMINI_API_KEY;
+ 
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+// ...existing code...
+
 
 // Endpoint to insert a vector
 app.post('/api/vector/insert', async (req, res) => {
@@ -42,11 +58,7 @@ app.post('/api/vector/search', async (req, res) => {
     res.status(500).json({ error: 'Failed to search vectors' });
   }
 });
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-require("dotenv").config();
-const axios = require("axios");
+
 
 // API endpoint for Gemini Embeddings
 app.post("/api/embedding", async (req, res) => {
@@ -88,21 +100,15 @@ app.post("/api/embedding", async (req, res) => {
 
  
 // Get the Gemini API key from environment variables
-const geminiApiKey = process.env.GEMINI_API_KEY;
- 
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+
 
 // API endpoint for Gemini
 app.post("/api/gemini", async (req, res) => {
   const { prompt } = req.body;
 
-  // RTFC System prompt
-  const systemPrompt = `You are an expert career counselor AI. Your job is to provide clear, actionable, and personalized career advice. Always respond in valid JSON format.`;
 
-  // RTFC User prompt
-  const userPrompt = `User Query: ${prompt}`;
+  // ChatGPT-like prompt
+  const userPrompt = `You are a helpful and knowledgeable career counselor AI. Please answer the following question with clear, actionable advice.\nQuestion: ${prompt}`;
 
   // Function definition for Gemini function calling
   const functionDeclarations = [
@@ -134,8 +140,7 @@ app.post("/api/gemini", async (req, res) => {
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
       {
         contents: [
-          { role: "system", parts: [{ text: systemPrompt }] },
-          { role: "user", parts: [{ text: userPrompt }] }
+          { parts: [{ text: userPrompt }] }
         ],
         generationConfig: {
           topP: 0.9, // Controls diversity of output (nucleus sampling)

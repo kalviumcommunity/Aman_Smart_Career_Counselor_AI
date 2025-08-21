@@ -1,8 +1,12 @@
 // Simple vector database using vectordb (npm install vectordb)
-const VectorDB = require('vectordb');
-const path = require('path');
+// Simple in-memory vector database for development
+const vectors = [];
 
-const dbPath = path.join(__dirname, 'vectors.db');
-const db = new VectorDB(dbPath);
- 
-module.exports  = db;   
+module.exports = {
+	insert: async (id, embedding, metadata) => {
+		vectors.push({ id, embedding, metadata });
+	},
+	getAll: async () => {
+		return vectors;
+	}
+};
