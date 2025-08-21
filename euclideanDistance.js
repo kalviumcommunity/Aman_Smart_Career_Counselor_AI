@@ -6,6 +6,6 @@ function euclideanDistance(a, b) {
     sum += Math.pow(a[i] - b[i], 2);
   }
   return Math.sqrt(sum);
-}
+}    
 
 module.exports = euclideanDistance;

@@ -5,4 +5,4 @@ const path = require('path');
 const dbPath = path.join(__dirname, 'vectors.db');
 const db = new VectorDB(dbPath);
 
-module.exports = db;
+module.exports = db;   
