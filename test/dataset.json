@@ -1,0 +1,37 @@
+[
+  {
+    "input": "What career options are best for someone interested in technology and helping others?",
+    "expected": {
+      "advice": "Consider careers such as IT support, technology trainer, or roles in EdTech companies.",
+      "reasoning": "Technology skills combined with a desire to help others are well suited for support, training, or educational technology roles."
+    }
+  },
+  {
+    "input": "How can I switch from marketing to data science?",
+    "expected": {
+      "advice": "Start by learning Python and basic statistics, then take online courses in data science and build a portfolio.",
+      "reasoning": "Transitioning from marketing to data science requires new technical skills and practical experience."
+    }
+  },
+  {
+    "input": "What should I do if I feel stuck in my current job?",
+    "expected": {
+      "advice": "Assess your interests, seek mentorship, and explore new learning opportunities.",
+      "reasoning": "Feeling stuck often means a need for growth or change; mentorship and learning can help."
+    }
+  },
+  {
+    "input": "Is remote work a good option for fresh graduates?",
+    "expected": {
+      "advice": "Remote work can be beneficial for flexibility, but fresh graduates should also seek opportunities for networking and mentorship.",
+      "reasoning": "Remote work offers flexibility, but in-person experiences can accelerate learning and career growth."
+    }
+  },
+  {
+    "input": "How do I prepare for a career in AI?",
+    "expected": {
+      "advice": "Learn programming, study machine learning fundamentals, and work on AI projects.",
+      "reasoning": "A strong foundation in programming and hands-on experience are key for AI careers."
+    }
+  }
+]
