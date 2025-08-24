@@ -19,6 +19,7 @@
     "test:unit": "jest test/dotProduct.test.js",
     "test:performance": "jest test/performance.test.js",
     "test:integration": "jest test/api.integration.test.js",
+    "test:topP": "jest test/topP.test.js",
     "start": "node server.js"
   },
   "dependencies": {
