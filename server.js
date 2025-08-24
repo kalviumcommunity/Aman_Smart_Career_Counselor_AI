@@ -179,8 +179,10 @@ app.post("/api/gemini", async (req, res) => {
           { parts: [{ text: userPrompt }] }
         ],
         generationConfig: {
-          topP: 0.9, // Controls diversity of output (nucleus sampling)
+          topP: 0.8, // Optimized for balanced creativity and coherence (nucleus sampling)
           topK: 40,  // Controls how many most likely tokens are considered
+          temperature: 0.7, // Controls randomness in token selection
+          maxOutputTokens: 1024, // Limits response length for efficiency
           stopSequences: ["<END>"] // Model will stop generation when <END> is encountered
         },
         tools: [
