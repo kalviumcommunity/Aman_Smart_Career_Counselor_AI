@@ -1,4 +1,5 @@
 const cosineSimilarity = require('./cosineSimilarity');
+const dotProduct = require('./dotProduct');
 // VectorDB integration
 const db = require('./vectorDB');
 const express = require("express");
@@ -35,24 +36,59 @@ app.post('/api/vector/insert', async (req, res) => {
 
 // Endpoint to search for similar vectors
 app.post('/api/vector/search', async (req, res) => {
-  const { embedding, k } = req.body;
+  const { embedding, k, method } = req.body;
   if (!embedding) {
     return res.status(400).json({ error: 'embedding is required' });
   }
+  
+  const searchMethod = method || 'euclidean'; // default to euclidean for backward compatibility
+  
   try {    
     // Get all vectors from DB (for demo, assuming db.getAll() returns [{id, embedding, metadata}])
     const allVectors = await db.getAll();
-    // Compute Euclidean distance for each
-    const euclideanDistance = require('./euclideanDistance');
-    const distances = allVectors.map(v => ({
-      id: v.id,    
-      distance: euclideanDistance(embedding, v.embedding),
-      metadata: v.metadata
-    }));
-    // Sort by distance, ascending (smaller = more similar)
-    distances.sort((a, b) => a.distance - b.distance);
+    
+    let results;
+    
+    switch (searchMethod) {
+      case 'cosine':
+        results = allVectors.map(v => ({
+          id: v.id,
+          similarity: cosineSimilarity(embedding, v.embedding),
+          metadata: v.metadata
+        }));
+        // Sort by similarity, descending (higher = more similar)
+        results.sort((a, b) => b.similarity - a.similarity);
+        break;
+        
+      case 'dotproduct':
+        results = allVectors.map(v => ({
+          id: v.id,
+          similarity: dotProduct(embedding, v.embedding),
+          metadata: v.metadata
+        }));
+        // Sort by similarity, descending (higher = more similar)
+        results.sort((a, b) => b.similarity - a.similarity);
+        break;
+        
+      case 'euclidean':
+      default:
+        const euclideanDistance = require('./euclideanDistance');
+        results = allVectors.map(v => ({
+          id: v.id,    
+          distance: euclideanDistance(embedding, v.embedding),
+          metadata: v.metadata
+        }));
+        // Sort by distance, ascending (smaller = more similar)
+        results.sort((a, b) => a.distance - b.distance);
+        break;
+    }
+    
     // Return top k
-    res.json({ results: distances.slice(0, k || 5) });
+    res.json({ 
+      results: results.slice(0, k || 5),
+      method: searchMethod,
+      total: allVectors.length
+    });
   } catch (err) {
     console.error('VectorDB search error:', err);
     res.status(500).json({ error: 'Failed to search vectors' });

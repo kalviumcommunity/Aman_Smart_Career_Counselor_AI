@@ -15,7 +15,10 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:unit": "jest test/dotProduct.test.js",
+    "test:performance": "jest test/performance.test.js",
+    "test:integration": "jest test/api.integration.test.js",
     "start": "node server.js"
   },
   "dependencies": {
@@ -24,5 +27,8 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "vectordb": "^0.21.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
